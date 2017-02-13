@@ -9,7 +9,7 @@
 ## Milestone 4: MONITORING + SPECIAL MILESTONE
 
 
-** Course link: ![CSC 791 - DevOps - NCSU Fall 16] (https://github.com/CSC-DevOps/Course/tree/Fall2016) **
+** Course link: [CSC 791 - DevOps - NCSU Fall 16] (https://github.com/CSC-DevOps/Course/tree/Fall2016) **
 
 
 
