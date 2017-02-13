@@ -1,0 +1,39 @@
+---
+- name: install nodejs
+  hosts: proxy_servers
+  become: true
+  become_method: sudo
+  tasks:
+   - name: add apt key for nodejs
+     apt_key:
+       url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
+       id: "68576280"
+       state: present
+
+   - name: add deb repo for nodejs
+     apt_repository:
+       repo: 'deb https://deb.nodesource.com/node_6.x {{ ansible_distribution_release }} main'
+       state: present
+
+   - name: add deb-src for nodejs
+     apt_repository:
+       repo: 'deb-src https://deb.nodesource.com/node_6.x {{ ansible_distribution_release }} main'
+       state: present
+
+   - name: install nodejs
+     apt: 
+       pkg:
+        - nodejs
+       state: installed
+       update_cache: yes
+
+   - name: install forever (to run Node.js app)
+     npm: 
+       name: forever 
+       global: yes 
+       state: present
+
+   - name: copy redis server
+     copy:
+       src: '../redis/redisServer.json'
+       dest: '/home/ubuntu'

@@ -1,0 +1,89 @@
+---
+- name: install nodejs
+  hosts: production_servers
+  become: true
+  become_method: sudo
+  tasks: 
+   - name: add apt key for nodejs
+     apt_key:
+       url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
+       id: "68576280"
+       state: present
+
+   - name: add deb repo for nodejs
+     apt_repository:
+       repo: 'deb https://deb.nodesource.com/node_6.x {{ ansible_distribution_release }} main'
+       state: present
+
+   - name: add deb-src for nodejs
+     apt_repository:
+       repo: 'deb-src https://deb.nodesource.com/node_6.x {{ ansible_distribution_release }} main'
+       state: present
+
+   - name: install nodejs
+     apt: 
+       pkg:
+        - nodejs
+       state: installed
+       update_cache: yes
+
+   - name: install forever
+     npm: 
+       name: forever 
+       global: yes 
+       state: present
+
+   - name: install python-pip
+     apt: 
+       pkg: "{{ item }}"
+       state: installed 
+       update_cache: true
+     with_items:
+      - build-essential
+      - python-pip
+      - python-dev
+      - git
+      - stress
+
+   - name: make dir
+     file:
+       path: /home/ubuntu/monitoring
+       state: directory
+
+   - name: copy monitoring scripts
+     copy:
+       src: '../monitoring/'
+       dest: '/home/ubuntu/monitoring/'
+
+   - name: install dependencies
+     pip:
+       requirements: '/home/ubuntu/monitoring/requirements.txt'
+
+   - name: copy redis server
+     copy:
+       src: '../redis/redisServer.json'
+       dest: '/home/ubuntu/'
+
+   - name: copy additional files
+     copy:
+       src: '~/.aws'
+       dest: '/home/ubuntu/'
+
+   - name: run monitor
+     command: forever start -c python monitor.py prod
+     args:
+       chdir: /home/ubuntu/monitoring
+
+   - name: make dir
+     file: path=/home/ubuntu/DevOps-M3 state=directory mode=0777
+
+   - name: deploy code
+     git: version=master repo=https://github.com/Ashit-Sood/DevOps-M3.git dest=/home/ubuntu/DevOps-M3/ accept_hostkey=true
+
+   - name: npm install
+     npm: path=/home/ubuntu/DevOps-M3
+
+   - name: start server
+     command: 'forever start server.js'
+     args:
+       chdir: /home/ubuntu/DevOps-M3

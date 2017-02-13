@@ -1,0 +1,1 @@
+while true; do (/usr/bin/nodejs /home/ubuntu/tmp/monkey.js &); sleep 30; done

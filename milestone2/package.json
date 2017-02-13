@@ -1,0 +1,29 @@
+{
+  "name": "hello-jenkins",
+  "descriptions": "hello jenkins test app",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "3.12.0"
+  },
+  "devDependencies": {
+    "chai": "~3.3.0",
+    "esprima": "^3.0.0",
+    "jshint": "2.9.3",
+    "mocha": "1.20.1",
+    "node-gyp": "^3.0.3",
+    "readdirp": "^2.0.0",
+    "supertest": "0.13.0",
+    "tape": "4.2.2",
+    "istanbul": "^0.4.5",
+    "microtime": "^2.1.1",
+    "mock-fs": "^3.11.0",
+    "random-js": "^1.0.8",
+    "underscore": "^1.8.3",
+    "mocha-cobertura-reporter": "*",
+    "tape": "4.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

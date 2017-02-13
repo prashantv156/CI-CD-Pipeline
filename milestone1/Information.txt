@@ -1,0 +1,10 @@
+Name: Ashit Sood; Jina Jain; Prashant Vichare
+Unity ID: asood3; jhjain; pvichar
+Contribution: 
+asood3:
+'Trigger Builds' and 'Dependency Management + Build Script Execution'
+jhjain and pvichar:
+'Build Status + External Post-Build Job Triggers', 
+'Multiple Branches, Multiple Jobs',
+'Build History and Display over HTTP'
+Tool/Source code: Git Bash; Jenkins; AWS EC2

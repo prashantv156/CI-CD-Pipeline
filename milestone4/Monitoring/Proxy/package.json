@@ -1,0 +1,15 @@
+{
+  "name": "instance-proxy",
+  "version": "0.0.0",
+  "description": "redis playground",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "redis": "^0.12.1",
+    "http": "^0.0.0",
+    "http-proxy": "^1.15.2"
+  }
