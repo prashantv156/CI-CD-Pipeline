@@ -44,7 +44,7 @@ def send_email_notification(action, cpu, mem):
 	
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.starttls()
-	server.login(fromAddr, 'Intelx486*')
+	server.login(fromAddr, 'password')
 	text = message.as_string()
 	server.sendmail(fromAddr, recipients, text)
 	server.quit()
